@@ -34,7 +34,10 @@ func ListenForwarder(addr, dest string) error {
 
 		log.Printf("recived %d bytes from %s", n, a)
 
-		go handleConn(c, buf, n, d)
+		b := make([]byte, n)
+		copy(b, buf[:n])
+
+		go handleConn(c, b, n, d)
 	}
 }
 
